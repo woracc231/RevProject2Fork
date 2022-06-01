@@ -1,7 +1,8 @@
 package com.project1;
 
 import com.project1.controller.RequestMapping;
-import com.project1.util.ConnectionFactory;
+import com.project1.dao.AuthenticationImpl;
+
 
 import io.javalin.Javalin;
 
@@ -13,11 +14,11 @@ public class MainDriver {
 
 	public static void main(String...args) {
 	
-	 ConnectionFactory conn = new ConnectionFactory();
+	 
 	 RequestMapping.configureRoutes(app);
 	 
-	 //testing connection
-	 conn.connectUser();
+	 
+
 	}
 	
 

@@ -6,27 +6,25 @@ import java.sql.SQLException;
 
 public class ConnectionFactory {
 
-	final String USERNAME = System.getenv("db_user");
-	final String PASSWORD = System.getenv("db_pass");
-	final String URL = System.getenv("db_url");
+	static final String USERNAME = System.getenv("db_user");
+	static final String PASSWORD = System.getenv("db_pass");
+	static final String URL = System.getenv("db_url");
 	
 	public ConnectionFactory() {
 		super();
 	}
 	
-	public void connectUser() {
+	public static Connection connectUser() throws SQLException{
 		
-		
-			Connection connection;
-			try {
-				connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-				System.out.println("connected");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			
+				Connection connection;
 		
+				connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+				System.out.println("connected"); //testing
+				
+				return connection;
+			
+
 	}
 	
 	
