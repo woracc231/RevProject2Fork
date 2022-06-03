@@ -6,11 +6,13 @@ import java.sql.SQLException;
 
 import com.project1.util.ConnectionFactory;
 
-import com.project1.service.AuthenticationService;
-
-public class AuthenticationImpl implements AuthenticationService{
-
+public class AuthenticationImpl {
 	
+	public AuthenticationImpl(){
+		super();
+	}
+
+	public static boolean f = false;	
 	public boolean authenticateUser(String username, String password) {
 		try {
 		Connection conn = ConnectionFactory.connectUser();
@@ -24,6 +26,7 @@ public class AuthenticationImpl implements AuthenticationService{
 				while(rs.next()) {
 					if (!rs.wasNull()) {
 						if (rs.getBoolean("ismanager")) {//table contains employees and managers
+								f = true; // allows route to /finance
 							System.out.println("is manager"); //testing 
 								return true;
 								}
@@ -44,4 +47,8 @@ public class AuthenticationImpl implements AuthenticationService{
 		System.out.println("not authorized"); //testing
 		return false;
 	}
-	}
+	
+public boolean check() {
+	return f;
+}
+}
