@@ -1,6 +1,6 @@
 package com.project1.models;
 
-import java.time.LocalDateTime;
+
 
 public class EmployeeRequest { //used for requests
 	
@@ -9,22 +9,30 @@ public class EmployeeRequest { //used for requests
 	private double amount;
 	private boolean pending;
 	private boolean approved;
-	LocalDateTime localTime;
-	
+	private String localTime;
 	
 	public EmployeeRequest() {
 		super();
-		
 	}
+	
 
-
-	public EmployeeRequest(String username, String newRequest, double amount, boolean pending, boolean approved) {
+	public EmployeeRequest(String username, String newRequest, double amount, boolean pending, boolean approved, String localTime) {
 		super();
 		this.username = username;
 		this.newRequest = newRequest;
 		this.amount = amount;
 		this.pending = pending;
 		this.approved = approved;
+		this.localTime = localTime;
+		
+	}
+	
+	public EmployeeRequest(String username, String newRequest, double amount, String localTime) {
+		super();
+		this.username = username;
+		this.newRequest = newRequest;
+		this.amount = amount;
+		this.localTime = localTime;
 		
 	}
 
@@ -79,18 +87,18 @@ public class EmployeeRequest { //used for requests
 	}
 
 
-	public LocalDateTime getLocalTime() {
+	public String getLocalTime() {
 		return localTime;
 	}
 
 
-	public void setLocalTime(LocalDateTime localTime) {
+	public void setLocalTime(String localTime) {
 		this.localTime = localTime;
 	}
 	
 	
 	public String toString() {
-		return "Employee [username=" + username + ", request=" + newRequest + ", amount=" + amount + ", pending=" + pending + ", approved=" + approved + ", time=" + localTime.now()+"]";
+		return "Employee [username=" + username + ", request=" + newRequest + ", amount=" + amount + ", pending=" + pending + ", approved=" + approved + ", time=" + localTime+"]";
 	}
 	
 

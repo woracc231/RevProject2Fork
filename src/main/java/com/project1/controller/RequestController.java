@@ -4,11 +4,12 @@ import java.sql.SQLException;
 
 import com.project1.dao.AuthenticationDAO;
 import com.project1.dao.RequestDAO;
+import com.project1.service.AuthenticationService;
 import com.project1.service.RequestService;
 
 import io.javalin.http.Context;
 
-public class RequestController implements RequestService{
+public class RequestController implements RequestService, AuthenticationService{
 	
 	public RequestController() {
 		super();
@@ -28,31 +29,57 @@ public class RequestController implements RequestService{
 				}
 	}
 	//-----------------------------------admin
-	public void getAllRequests(Context ctx) throws SQLException{
+	public void getAllRequests(Context ctx){
 		
 		RequestDAO reqDao = new RequestDAO();
-		reqDao.getAllRequests(ctx);
-		ctx.status(200);
+		try {
+			reqDao.getAllRequests(ctx);
+			ctx.status(200);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
-	public void requestApproval(Context ctx) throws SQLException {
+	public void requestApproval(Context ctx) {
 		
 		String user = ctx.formParam("username");
 		RequestDAO req = new RequestDAO();
-		req.approveRequest(ctx, user);
-		ctx.status(201);
+		try {
+			req.approveRequest(ctx, user);
+			ctx.status(201);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
-	public void requestDenial(Context ctx) throws SQLException {
+	public void requestDenial(Context ctx) {
 		
 		String user = ctx.formParam("username");
 		RequestDAO req = new RequestDAO();
-		req.denyRequest(ctx, user);
-		ctx.status(201);
+		try {
+			req.denyRequest(ctx, user);
+			ctx.status(201);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void history(Context ctx) {
+		
+		RequestDAO req = new RequestDAO();
+		try {
+			req.history(ctx);
+			ctx.status(201);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	//-----------------------------------------------employee
-	public void getPending(Context ctx) throws SQLException{
+	public void getPending(Context ctx){
 		
 		String user = ctx.formParam("username");
 		String check = ctx.cachedSessionAttribute("username").toString(); 
@@ -61,12 +88,17 @@ public class RequestController implements RequestService{
 
 			 RequestDAO req = new RequestDAO();
 			 
-			 req.getRequests(ctx, check);
-			 ctx.status(200);
+			 try {
+				req.getRequests(ctx, check);
+				ctx.status(200);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			 
 		}
 	}
 	
-	public void getHistory(Context ctx) throws SQLException{
+	public void getHistory(Context ctx){
 		
 		String user = ctx.formParam("username");
 		String check = ctx.cachedSessionAttribute("username").toString(); 
@@ -75,17 +107,27 @@ public class RequestController implements RequestService{
 
 			 RequestDAO req = new RequestDAO();
 			 
-			 req.getRequestHistory(ctx, check);
-			 ctx.status(200);
+			 try {
+				req.getRequestHistory(ctx, check);
+				ctx.status(200);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			 
 		}
 	}
 	
-	public void postRequest(Context ctx) throws SQLException{
+	public void postRequest(Context ctx){
 		
 		RequestDAO req = new RequestDAO();
 		
-		req.postRequest(ctx);
-		ctx.status(201);
+		try {
+			req.postRequest(ctx);
+			ctx.status(201);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 }

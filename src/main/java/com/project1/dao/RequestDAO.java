@@ -27,7 +27,7 @@ public class RequestDAO {
 			ArrayList<EmployeeRequest> a = new ArrayList<>();
 			while(rs.next()) {
 						EmployeeRequest e = new EmployeeRequest(rs.getString("username"),
-						rs.getString("newRequest"), rs.getDouble("amount"), rs.getBoolean("pending"), rs.getBoolean("approved"));
+						rs.getString("newRequest"), rs.getDouble("amount"), rs.getBoolean("pending"), rs.getBoolean("approved"), rs.getString("timestamp"));
 						a.add(e);
 						}
 			for (EmployeeRequest x: a) 
@@ -45,7 +45,7 @@ public class RequestDAO {
 		ArrayList<EmployeeRequest> a = new ArrayList<>();
 		while(rs.next()) {
 					EmployeeRequest e = new EmployeeRequest(rs.getString("username"),
-					rs.getString("newRequest"), rs.getDouble("amount"), rs.getBoolean("pending"), rs.getBoolean("approved"));
+					rs.getString("newRequest"), rs.getDouble("amount"), rs.getBoolean("pending"), rs.getBoolean("approved"), rs.getString("timestamp"));
 					a.add(e);
 					}
 		for (EmployeeRequest x: a) 
@@ -63,7 +63,7 @@ public class RequestDAO {
 		ArrayList<EmployeeRequest> a = new ArrayList<>();
 		while(rs.next()) {
 					EmployeeRequest e = new EmployeeRequest(rs.getString("username"),
-					rs.getString("newRequest"), rs.getDouble("amount"), rs.getBoolean("pending"), rs.getBoolean("approved"));
+					rs.getString("newRequest"), rs.getDouble("amount"), rs.getBoolean("pending"), rs.getBoolean("approved"), rs.getString("timestamp"));
 					a.add(e);
 					}
 		for (EmployeeRequest x: a) 
@@ -122,6 +122,22 @@ public class RequestDAO {
 			ps.executeUpdate();
 			
 		
+	}
+	
+	public void history(Context ctx) throws SQLException{
+		
+		String sql = ("SELECT * FROM history"); //employee-level request history
+		Connection connection = ConnectionFactory.connectUser();
+		PreparedStatement ps = connection.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		ArrayList<EmployeeRequest> a = new ArrayList<>();
+		while(rs.next()) {
+					EmployeeRequest e = new EmployeeRequest(rs.getString("username"),
+					rs.getString("request"), rs.getDouble("amount"), rs.getString("timestamp"));
+					a.add(e);
+					}
+		for (EmployeeRequest x: a) 
+			ctx.json(a);
 	}
 	
 }

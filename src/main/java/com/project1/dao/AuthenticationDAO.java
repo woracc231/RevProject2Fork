@@ -26,7 +26,7 @@ public class AuthenticationDAO {
 				while(rs.next()) {
 					if (!rs.wasNull()) {
 						if (rs.getBoolean("ismanager")) {//table contains employees and managers
-								f = true; // allows admin 
+								f = true; // allows admin access
 								return true;
 								}
 						return true;
@@ -48,5 +48,5 @@ public class AuthenticationDAO {
 	
 public boolean check() {
 	return f;
-}
+	}
 }

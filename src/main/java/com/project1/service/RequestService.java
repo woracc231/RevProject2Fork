@@ -4,8 +4,6 @@ import io.javalin.http.Context;
 
 public interface RequestService {
 	
-	
-	public void login(Context ctx);
 	public void getAllRequests(Context ctx);
 	public void requestApproval(Context ctx);
 	public void requestDenial(Context ctx);

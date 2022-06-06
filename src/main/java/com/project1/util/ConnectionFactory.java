@@ -16,14 +16,10 @@ public class ConnectionFactory {
 	
 	public static Connection connectUser() throws SQLException{
 		
-			
 				Connection connection;
-		
 				connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-				
 				return connection;
 			
-
 	}
 	
 	

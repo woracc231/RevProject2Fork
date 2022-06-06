@@ -45,6 +45,12 @@ public class RequestMapping {
 			
 				});
 			
+			app.get("/admin/history", ctx -> {
+				
+					req.history(ctx);
+				
+				});
+			
 			
 			
 			//employee endpoints
@@ -53,7 +59,7 @@ public class RequestMapping {
 				
 					req.getPending(ctx);
 
-			});
+				});
 			
 			app.get("/employee/history", ctx -> { //request history
 				
