@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 import com.project1.util.ConnectionFactory;
 
-public class AuthenticationImpl {
+public class AuthenticationDAO {
 	
-	public AuthenticationImpl(){
+	public AuthenticationDAO(){
 		super();
 	}
 
@@ -26,8 +26,7 @@ public class AuthenticationImpl {
 				while(rs.next()) {
 					if (!rs.wasNull()) {
 						if (rs.getBoolean("ismanager")) {//table contains employees and managers
-								f = true; // allows route to /finance
-							System.out.println("is manager"); //testing 
+								f = true; // allows admin 
 								return true;
 								}
 						return true;
@@ -44,7 +43,6 @@ public class AuthenticationImpl {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println("not authorized"); //testing
 		return false;
 	}
 	

@@ -12,9 +12,9 @@ import com.project1.util.ConnectionFactory;
 import io.javalin.http.Context;
 
 
-public class RequestServiceImpl {
+public class RequestDAO {
 
-	public RequestServiceImpl() {
+	public RequestDAO() {
 		super();	
 	}
 	

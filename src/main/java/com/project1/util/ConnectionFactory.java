@@ -20,7 +20,6 @@ public class ConnectionFactory {
 				Connection connection;
 		
 				connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-				System.out.println("connected"); //testing
 				
 				return connection;
 			
