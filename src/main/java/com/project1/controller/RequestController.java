@@ -2,27 +2,36 @@ package com.project1.controller;
 
 import java.sql.SQLException;
 
+import com.project1.MainDriver;
 import com.project1.dao.AuthenticationDAO;
 import com.project1.dao.RequestDAO;
 import com.project1.service.AuthenticationService;
+
 import com.project1.service.RequestService;
 
 import io.javalin.http.Context;
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.prometheus.PrometheusConfig;
+import io.micrometer.prometheus.PrometheusMeterRegistry;
 
 public class RequestController implements RequestService, AuthenticationService{
-	
+
 	public RequestController() {
 		super();
 	}
+	static PrometheusMeterRegistry registry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
+	
 	//-----------------------------------login
 	public void login(Context ctx) {
+		MainDriver.counter(); //updates prometheus for login attempts
 		AuthenticationDAO authDao = new AuthenticationDAO();
-	
 		String username = ctx.formParam("username");
 		String password = ctx.formParam("password");
+		
 			if(authDao.authenticateUser(username, password)) {
 				ctx.sessionAttribute("username", username);
 				ctx.sessionAttribute("password", password);
+				
 				ctx.status(201);
 				} else {
 					ctx.status(403);
@@ -129,5 +138,6 @@ public class RequestController implements RequestService, AuthenticationService{
 		}
 		
 	}
+
 	
 }

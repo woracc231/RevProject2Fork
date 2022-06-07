@@ -1,18 +1,22 @@
 package com.project1.controller;
 import com.project1.dao.AuthenticationDAO;
-import com.project1.dao.RequestDAO;
 import io.javalin.Javalin;
 
 public class RequestMapping {
 
 	private static RequestController req = new RequestController();
 	private static AuthenticationDAO authDao = new AuthenticationDAO();
+	
+
+
 	public static void configureRoutes(Javalin app) {
 		
-			//login	------------------------------------------------------------------------------------------
+			//login	----------------------------------------------------------------------------------------
 			app.post("/login", ctx -> {	
-			
+				
+				
 				req.login(ctx);
+				
 			
 				});
 			
@@ -81,6 +85,8 @@ public class RequestMapping {
 				ctx.consumeSessionAttribute("username");
 				ctx.status(200);
 			});
+			
+			
 			
 			
 	}
