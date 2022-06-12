@@ -1,12 +1,19 @@
-package com.pancakecontrol.dao;
+package com.pancakecontrol.controller;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public abstract class UserDAO {
+import com.pancakecontrol.dao.EmployeeDAO;
+import com.pancakecontrol.service.User;
 
-	public static void getAcct(String username, Connection con) throws SQLException {
+/* putting this here for now 6/12 */
+
+public class UserMap implements User {
+	
+	
+	static EmployeeDAO emp = new EmployeeDAO();
+	public void getAcct(String username, Connection con) {
 			System.out.println("\nWelcome to the menu!\n");
 			System.out.println("Here are your options:");
 			System.out.println("----------------------");
@@ -22,7 +29,7 @@ public abstract class UserDAO {
 				Scanner input1 = new Scanner(System.in);
 				System.out.println("Please enter your name: ");
 				String name = input1.next();
-				EmployeeDAO.notify(name, sav_accounts, con);
+				emp.notify(name, sav_accounts, con);
 				break;
 			case "C":
 				System.out.println("\nChecking account");
@@ -31,7 +38,7 @@ public abstract class UserDAO {
 				System.out.println("Please enter your name: ");
 				String name2 = input2.next();
 				String chk_accounts = "chk_accounts";
-				EmployeeDAO.notify(name2,chk_accounts, con);
+				emp.notify(name2,chk_accounts, con);
 				break;
 			case "B":
 				System.out.println("Savings and Checking account");
@@ -40,7 +47,7 @@ public abstract class UserDAO {
 				System.out.println("Please enter your name: ");
 				String name3 = input3.next();
 				String both_accounts = "both_accounts";
-				EmployeeDAO.notify(name3, both_accounts, con);
+				emp.notify(name3, both_accounts, con);
 				break;
 			default:
 				System.out.println("Invalid entry");

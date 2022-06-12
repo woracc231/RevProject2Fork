@@ -7,13 +7,16 @@ import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
+import com.pancakecontrol.controller.UserMap;
+import com.pancakecontrol.service.Customer;
 
 
-public abstract class CustomerDAO {
+
+public class CustomerDAO implements Customer {
 	
 	
-	
-	public static void getAcct(String username, Connection con) {
+	static UserMap usr = new UserMap();
+	public void getAcct(String username, Connection con) {
 		
 		try {
 			String SQLquery = "SELECT * FROM users WHERE usercolumn = "+"'"+username+"'";
@@ -53,7 +56,7 @@ public abstract class CustomerDAO {
 
 
 
-	private static void deposit(String username, Connection con, double deposit) {
+	public void deposit(String username, Connection con, double deposit) {
 			
 		try {
 			String SQLquery = "SELECT balance FROM users WHERE usercolumn = "+"'"+username+"'";
@@ -81,7 +84,7 @@ public abstract class CustomerDAO {
 	
 	
 	
-	private static void view(String username, Connection con) {
+	public void view(String username, Connection con) {
 		String SQLquery = "SELECT balance FROM users WHERE usercolumn = "+"'"+username+"'";
 		try {
 		Statement stmt = con.createStatement();
@@ -102,7 +105,7 @@ public abstract class CustomerDAO {
 	
 	
 	
-	private static void withdraw(String username, Connection con, double withdraw) {
+	public void withdraw(String username, Connection con, double withdraw) {
 		
 		try {
 			String SQLquery = "SELECT balance FROM users WHERE usercolumn = "+"'"+username+"'";
@@ -130,7 +133,7 @@ public abstract class CustomerDAO {
 	
 	
 	
-	public static void transfer(String username, Connection con, double amt, int acctNum) {
+	public void transfer(String username, Connection con, double amt, int acctNum) {
 		boolean x = true; //if the account balance is positive after the withdrawal, the transfer will continue
 		//First, withdraw from this account
 		try {
@@ -195,7 +198,7 @@ public abstract class CustomerDAO {
 	
 	
 	
-	public static void menuOptions(String username, Connection con) {
+	public void menuOptions(String username, Connection con) {
 		Scanner input = new Scanner(System.in);
 		System.out.println("\nHere are your options:\n----------------------");
 		System.out.println("[M]ake a deposit\t[W]ithdraw\t[T]ransfer money\t[V]iew balance\n[N]ew account \t     [Q]uit");
@@ -243,12 +246,8 @@ public abstract class CustomerDAO {
 			break;
 			
 		case "N":
-			try {
-				UserDAO.getAcct(username, con);
-			} catch (SQLException e) {
-				
-				e.printStackTrace();
-			}
+			
+			usr.getAcct(username, con);
 			break;
 			
 		}

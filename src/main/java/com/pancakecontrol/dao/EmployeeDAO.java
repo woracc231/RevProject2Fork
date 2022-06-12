@@ -6,9 +6,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
-public abstract class EmployeeDAO{
+import com.pancakecontrol.service.Employee;
 
-	public static void notify(String name, String acct, Connection con) {
+public class EmployeeDAO implements Employee {
+
+	public void notify(String name, String acct, Connection con) {
 			try {
 		String SQLquery = "SELECT sav_accounts FROM pending";
 			Statement stmt = con.createStatement();
@@ -32,7 +34,7 @@ public abstract class EmployeeDAO{
 	
 	
 	
-	public static void employeeMenu(String username, Connection con) {
+	public void employeeMenu(String username, Connection con) {
 		
 		System.out.println("\nThe Employee Menu");
 		System.out.println("-----------------");

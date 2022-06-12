@@ -8,12 +8,14 @@ import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.util.Scanner;
 
-public abstract class ZelleDAO{
+public class ZelleDAO{
 	//This getAcct function gets a bit crazy. it notifies you of a pending transfer when you log in by checking a table 
 	// called tuser for a positive balance. that table is set up just to hold pending transfers and it's zeroed out after
 	//the transfer is complete. I probably would have done a lot of this in SQL with functions and triggers, but I had
 	//so many weird problems with dbeaver that I decided to do more of the work in java
-	public static void getAcct(String username, Connection con) {
+	
+	static CustomerDAO cust = new CustomerDAO();
+	public void getAcct(String username, Connection con) {
 		
 	try {
 			Scanner input = new Scanner(System.in);
@@ -49,7 +51,7 @@ public abstract class ZelleDAO{
 								break;
 							case "N":
 								System.out.println("Thank you!");
-								CustomerDAO.menuOptions(username, con);
+								cust.menuOptions(username, con);
 								
 								break;
 							
@@ -72,10 +74,10 @@ public abstract class ZelleDAO{
 	//First, withdraw from this account
 	switch (choice2) {
 	case "N":
-		CustomerDAO.menuOptions(username, con);
+		cust.menuOptions(username, con);
 		break;
 	default:
-		CustomerDAO.menuOptions(username, con);
+		cust.menuOptions(username, con);
 		break;
 	case "Y":
 	Scanner input3 = new Scanner(System.in);
@@ -98,7 +100,7 @@ public abstract class ZelleDAO{
 				   } else { 
 					   x = false;
 					   System.out.println("Insufficient funds");
-					   CustomerDAO.menuOptions(username, con);
+					   cust.menuOptions(username, con);
 					   }
 				if (x == true) {
 				Statement stmt2 = con.createStatement();

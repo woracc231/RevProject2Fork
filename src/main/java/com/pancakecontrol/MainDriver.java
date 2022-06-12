@@ -18,8 +18,7 @@ public static void main(String[] args) {
 	        
 	       
 	  
-	
-	        
+
 		boolean x = true;
 		
 		String choice;

@@ -7,17 +7,23 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
+import com.pancakecontrol.controller.UserMap;
 import com.pancakecontrol.dao.CustomerDAO;
 import com.pancakecontrol.dao.EmployeeDAO;
-import com.pancakecontrol.dao.UserDAO;
 import com.pancakecontrol.dao.ZelleDAO;
+import com.pancakecontrol.service.Authentication;
 
 
-public class ConnectionFactory {
+public class ConnectionFactory implements Authentication {
 
 	final String URL = System.getenv("db_url");
 	final String USERNAME = System.getenv("db_login");
 	final String PASSWORD = System.getenv("db_pass");
+	
+	static CustomerDAO cust = new CustomerDAO();
+	static EmployeeDAO emp = new EmployeeDAO();
+	static ZelleDAO zell = new ZelleDAO();
+	static UserMap usr = new UserMap();
 	
 	public ConnectionFactory(){
 		super();
@@ -52,7 +58,7 @@ public class ConnectionFactory {
 				
 					if (access == true) {
 			
-						CustomerDAO.getAcct(username, connection);//********************
+						cust.getAcct(username, connection);//********************
 						
 						} else { System.out.println("denied"); }
 					
@@ -92,7 +98,7 @@ public class ConnectionFactory {
 		
 			if (access == true) {
 	
-				ZelleDAO.getAcct(username, connection);//********************
+				zell.getAcct(username, connection);//********************
 				
 				} else { System.out.println("denied"); }
 			
@@ -132,7 +138,7 @@ public class ConnectionFactory {
 		
 			if (access == true) {
 	
-				UserDAO.getAcct(username, connection);//********************
+				usr.getAcct(username, connection);//********************
 				
 				} else { System.out.println("denied"); }
 			
@@ -171,7 +177,7 @@ public class ConnectionFactory {
 		
 			if (access == true) {
 	
-				EmployeeDAO.employeeMenu(username, connection);
+				emp.employeeMenu(username, connection);
 				
 				} else { System.out.println("denied"); }
 			
