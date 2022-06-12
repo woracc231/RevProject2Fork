@@ -1,15 +1,25 @@
 package com.pancakecontrol;
 
 import java.util.Scanner;
+import io.javalin.Javalin;
+import io.javalin.http.staticfiles.Location;
 
-import com.pacakecontrol.util.ConnectionFactory;
+import com.pancakecontrol.util.ConnectionFactory;
 
 public class MainDriver {
 	
 public static void main(String[] args) {
 		
-		System.out.println("\033[38;5;15;48;5;88m"); //this changes the colors in the console
-		 
+
+	   
+	        Javalin app = Javalin.create(config -> {
+	            config.addStaticFiles("./", Location.EXTERNAL);
+	        		}).start(7070);
+	        
+	       
+	  
+	
+	        
 		boolean x = true;
 		
 		String choice;

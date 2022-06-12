@@ -1,4 +1,4 @@
-package com.pacakecontrol.util;
+package com.pancakecontrol.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
